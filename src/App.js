@@ -21,17 +21,15 @@ function App() {
         <div>BLOG</div>
       </div>
       <button onClick={ modiTitle }>버튼</button>
-      <div className="list">
-        <h3> { titles[0] } <span onClick={ () => { setLike(like + 1) } }>👍</span> { like } </h3>
-        <p> { contents[0] } </p>
-        <hr/>
-        <h3> { titles[1] } </h3>
-        <p> { contents[1] } </p>
-        <hr/>
-        <h3> { titles[2] } </h3>
-        <p> { contents[2] } </p>
-        <hr/>
-      </div>
+
+      { titles.map( (e, i) => 
+        (<div className="list">
+          <h3> { e } <span onClick={ () => { setLike(like + 1) } }>👍</span> { like } </h3>
+          <p> { contents[i] } </p>
+          <hr/>
+        </div>)
+      ) }
+
       <button onClick={ () => { setModal(true); } }>열기</button>
       <button onClick={ () => { setModal(false); } }>닫기</button>
 
