@@ -7,6 +7,7 @@ function App() {
   let [titles, setTitles] = useState(["서울시 맛집 정보", "경기도 맛집 정보", "대구 맛집 정보"]);
   let [contents, setContents] = useState(["서울 맛집 그것은 진짜 맛있다.", "경기도 맛집 그것은 진짜 맛있다.", "대구 맛집 그것은 진짜 맛있다."]);
   let [like, setLike] = useState(0);
+  let [modal, setModal] = useState(false);
 
   function modiTitle() {
     let newTitles = [...titles]; // ... stread operator(전개 연산자) 이유는 모든 벼수는
@@ -31,8 +32,10 @@ function App() {
         <p> { contents[2] } </p>
         <hr/>
       </div>
+      <button onClick={ () => { setModal(true); } }>열기</button>
+      <button onClick={ () => { setModal(false); } }>닫기</button>
 
-      <Modal/>
+      { modal === true ? <Modal/> : null }
 
     </div>
   );
