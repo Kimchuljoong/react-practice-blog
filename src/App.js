@@ -9,7 +9,8 @@ function App() {
   let [like, setLike] = useState(0);
   let [modal, setModal] = useState(false);
   let [selected, setSelected] = useState(0);
-  let [inputData, setInputData] = useState("");
+  let [inputTitle, setInputTitle] = useState("");
+  let [inputContent, setInputContent] = useState("");
 
 
   function modiTitle() {
@@ -32,8 +33,15 @@ function App() {
           <hr/>
         </div>)
       ) }
-
-      <input onChange={ (e) => { setInputData(e.target.value) } }/>
+      
+      <div className="publish">
+        <input onChange={ (e) => { setInputTitle(e.target.value) } }/>
+        <input onChange={ (e) => { setInputContent(e.target.value) } }/>        
+        <button onClick={ () => { 
+          setTitles([inputTitle, ...titles]);
+          setContents([inputContent, ...contents]);
+        } }>저장</button>
+      </div>
 
       <button onClick={ () => { setModal(!modal) } }>열기/닫기</button>
 
