@@ -8,6 +8,9 @@ function App() {
   let [contents, setContents] = useState(["서울 맛집 그것은 진짜 맛있다.", "경기도 맛집 그것은 진짜 맛있다.", "대구 맛집 그것은 진짜 맛있다."]);
   let [like, setLike] = useState(0);
   let [modal, setModal] = useState(false);
+  let [selected, setSelected] = useState(0);
+  let [inputData, setInputData] = useState("");
+
 
   function modiTitle() {
     let newTitles = [...titles]; // ... stread operator(전개 연산자) 이유는 모든 벼수는
@@ -23,27 +26,28 @@ function App() {
       <button onClick={ modiTitle }>버튼</button>
 
       { titles.map( (e, i) => 
-        (<div className="list">
+        (<div className="list" key={i} onClick={ () => {setSelected(i) } }>
           <h3> { e } <span onClick={ () => { setLike(like + 1) } }>👍</span> { like } </h3>
           <p> { contents[i] } </p>
           <hr/>
         </div>)
       ) }
 
-      <button onClick={ () => { setModal(!modal); } }>열기/닫기</button>
+      <input onChange={ (e) => { setInputData(e.target.value) } }/>
 
-      { modal === true ? <Modal/> : null }
+      <button onClick={ () => { setModal(!modal) } }>열기/닫기</button>
+
+      { modal === true ? <Modal titles={titles} contents={contents} selected={selected} /> : null }
 
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-        <h2>제목</h2>
-        <p>날짜</p>
-        <p>상세내용</p>
+        <h2>{props.titles[props.selected]}</h2>
+        <p>{props.contents[props.selected]}</p>
     </div>
   );
 }
