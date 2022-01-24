@@ -9,6 +9,8 @@ function App() {
   let [like, setLike] = useState(0);
   let [modal, setModal] = useState(false);
   let [selected, setSelected] = useState(0);
+  let [inputData, setInputData] = useState("");
+
 
   function modiTitle() {
     let newTitles = [...titles]; // ... stread operator(전개 연산자) 이유는 모든 벼수는
@@ -24,14 +26,16 @@ function App() {
       <button onClick={ modiTitle }>버튼</button>
 
       { titles.map( (e, i) => 
-        (<div className="list" onClick={() => {setSelected(i)} }>
+        (<div className="list" key={i} onClick={ () => {setSelected(i) } }>
           <h3> { e } <span onClick={ () => { setLike(like + 1) } }>👍</span> { like } </h3>
           <p> { contents[i] } </p>
           <hr/>
         </div>)
       ) }
 
-      <button onClick={ () => { setModal(!modal); } }>열기/닫기</button>
+      <input onChange={ (e) => { setInputData(e.target.value) } }/>
+
+      <button onClick={ () => { setModal(!modal) } }>열기/닫기</button>
 
       { modal === true ? <Modal titles={titles} contents={contents} selected={selected} /> : null }
 
